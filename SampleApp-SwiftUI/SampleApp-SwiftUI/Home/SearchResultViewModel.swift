@@ -38,8 +38,6 @@ struct SearchResult: Codable {
     }
 }
 
-
-
 final class SearchResultViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var searchResults: [SearchResult] = []
@@ -54,7 +52,8 @@ final class SearchResultViewModel: ObservableObject {
     
     private func getSearchResults() {
         guard let request = Utils.buildURLRequest(requestData: .search, queryParams: [URLQueryItem(name: "query", value: "dog")]) else {
-            // throw error
+            showError = true
+            errorMessage = "Error in URLRequest"
             return
         }
         APIClient.shared.getSearchResults(request: request, type: SearchResponse.self)
@@ -63,7 +62,8 @@ final class SearchResultViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
-                    // throw error
+                    self.showError = true
+                    self.errorMessage = error.localizedDescription
                     break
                 }
             } receiveValue: { searchResponse in

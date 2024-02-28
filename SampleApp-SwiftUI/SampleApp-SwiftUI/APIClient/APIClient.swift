@@ -33,10 +33,10 @@ final class APIClient {
     private var cancellables = Set<AnyCancellable>()
     static var shared = APIClient()
     
-    func getSearchResults<T: Decodable> (request: URLRequest, type: T.Type) -> Future<T, SampleAppError> {
-        return Future<T, SampleAppError> { [weak self] promise in
+    func getSearchResults<T: Decodable> (request: URLRequest, type: T.Type) -> Future<T, URLError> {
+        return Future<T, URLError> { [weak self] promise in
             guard let self = self else {
-                promise(.failure(SampleAppError.unknownError))
+                promise(.failure(URLError(.badURL)))
                 return
             }
             URLSession.shared.dataTaskPublisher(for: request)
@@ -45,7 +45,7 @@ final class APIClient {
                     guard
                         let response = output.response as? HTTPURLResponse,
                         response.statusCode >= 200 && response.statusCode < 300 else {
-                        throw URLError(URLError.badServerResponse)
+                        throw URLError(.badServerResponse)
                     }
                     return output.data
                 })
@@ -55,7 +55,7 @@ final class APIClient {
                     case .finished:
                         break
                     case .failure:
-                        promise(.failure(SampleAppError.apiError))
+                        promise(.failure(URLError(.cannotDecodeContentData)))
                     }
                 } receiveValue: { results in
                     promise(.success(results))
