@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct HomeRowView: View {
-    let searchResult: SearchResult
+    let searchResult: SearchResultModel
     
     var body: some View {
-        NavigationLink(destination: ImageDetailView(result: searchResult)) {
-            HStack {
-//                Image(searchResult.thumbUrl)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 70, height: 70)
-//                    .cornerRadius(5)
-//                    .padding(.leading, 8)
-                Text(searchResult.alt_description)
-                    .font(.headline)
-                    .lineLimit(1)
-                Spacer()
+        HStack(alignment: .top, spacing: 10) {
+            AsyncImage(url: URL(string: searchResult.imageUrls.thumb)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 80, height: 80)
+            } placeholder: {
+                Image("img_placeholder", bundle: .main)
             }
-            .padding(.vertical, 8)
+            VStack(alignment: .leading) {
+                Text(searchResult.title)
+                    .font(.headline)
+                Spacer()
+                HStack(alignment: .bottom) {
+                    Text("By \(searchResult.user.name)")
+                        .font(.footnote)
+                    Spacer()
+                    Text("\(searchResult.likes) likes")
+                        .font(.footnote)
+                }
+                
+            }
+            
         }
+        .padding(.vertical, 8)
     }
 }
 
-//struct HomeRowView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeRowView(searchResult: SearchResult(id: "1", photoId: "", thumbUrl: "", title: "Preview Title", author: "Preview Author", likes: 300))
-//    }
-//}
+#Preview {
+    HomeRowView(searchResult: SearchResultModel(photoId: "1", title: "Preview title", likes: 200, user: .init(name: "User Name"), imageUrls: .init(thumb: "")))
+}

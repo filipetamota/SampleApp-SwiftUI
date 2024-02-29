@@ -8,37 +8,64 @@
 import SwiftUI
 
 struct ImageDetailView: View {
-    let result: SearchResult
+    let photoId: String
+    @ObservedObject var viewModel = ImageDetailViewModel()
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                VStack {
-//                    Image(result.thumbUrl)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fill)
-//                        .frame(maxWidth: .infinity, maxHeight: proxy.size.width)
-//                        .cornerRadius(10)
-//                        .padding()
-                    Text(result.alt_description)
-                        .font(.largeTitle)
-                        .padding(.bottom, 10)
-                    Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis massa et eros volutpat posuere a vel nisl.")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding()
-                    Spacer()
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 10) {
+                AsyncImage(url: URL(string: viewModel.detailResponse.imageUrls.regular)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                } placeholder: {
+                    Image("img_placeholder", bundle: .main)
                 }
+
+                if let title = viewModel.detailResponse.title {
+                    Text(title)
+                        .font(.headline)
+                }
+                if let description = viewModel.detailResponse.description {
+                    Text(description)
+                        .font(.subheadline)
+                }
+                Text(buildTakenText(model: viewModel.detailResponse))
+                    .font(.footnote)
+                Spacer()
             }
-            .navigationTitle("Detail")
-            .navigationBarTitleDisplayMode(.inline)
-            .edgesIgnoringSafeArea(.bottom)
         }
+        .navigationTitle("Detail")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Image(systemName: "bookmark.circle")
+                    .onTapGesture {
+                        
+                    }
+            }
+        }
+        .padding()
+        .onAppear(perform: {
+            viewModel.getImageDetail(photoId: photoId)
+        })
+    }
+    
+    private func buildTakenText(model: DetailResponseModel) -> String {
+        var takenByText = "Taken by \(model.user.name)"
+        if let equipmentModel = model.equipment?.model {
+            takenByText += " with \(equipmentModel)"
+        }
+        if let location = model.location?.name {
+            takenByText += " in \(location)"
+        }
+        takenByText += "."
+        
+        return takenByText
     }
 }
 
-//struct ImageDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImageDetailView(result: SearchResult(id: "1", photoId: "123", thumbUrl: "", title: "Preview title", author: "Author title", likes: 123))
-//    }
-//}
+#Preview {
+    ImageDetailView(photoId: "1")
+}

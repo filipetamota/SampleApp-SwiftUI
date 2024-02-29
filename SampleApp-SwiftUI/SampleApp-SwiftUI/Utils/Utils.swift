@@ -21,7 +21,7 @@ final class Utils {
         return property
     }
 
-    static func buildURLRequest(requestData: RequestData, queryParams: [URLQueryItem]? = nil, pathVariable: String? = nil) -> URLRequest? {
+    static func buildURLRequest(requestData: RequestData, queryParams: [String: String]? = nil, pathVariable: String? = nil) -> URLRequest? {
         guard
             let domain = getAPIInfoFromPlist(propertyName: "Domain"),
             let accessKey = getAPIInfoFromPlist(propertyName: "AccessKey"),
@@ -38,11 +38,10 @@ final class Utils {
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
-        if
-            let queryParams = queryParams,
-            requestData.method() == "GET"
-        {
-            components?.queryItems = queryParams
+        if  let queryParams = queryParams {
+            components?.queryItems = queryParams.compactMap({ item in
+                URLQueryItem(name: item.key, value: item.value)
+            })
         }
         
         var urlRequest = URLRequest(url: url)
