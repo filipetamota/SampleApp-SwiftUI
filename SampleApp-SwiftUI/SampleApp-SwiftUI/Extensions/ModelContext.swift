@@ -10,7 +10,7 @@ import SwiftData
 
 extension ModelContext {
     func getAllFavorites() -> [Favorite] {
-        var descriptor = FetchDescriptor<Favorite>()
+        let descriptor = FetchDescriptor<Favorite>()
         do {
             return try fetch(descriptor)
         } catch {
@@ -20,7 +20,7 @@ extension ModelContext {
     
     func getFavoriteById(favId: String) -> Favorite? {
         let predicate = #Predicate<Favorite> { object in
-            object.favoriteId == favId
+            object.photoId == favId
         }
         var descriptor = FetchDescriptor(predicate: predicate)
         descriptor.fetchLimit = 1

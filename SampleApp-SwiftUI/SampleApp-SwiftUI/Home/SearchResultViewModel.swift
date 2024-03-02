@@ -16,7 +16,7 @@ struct SearchResponseModel: Codable {
 
 struct SearchResultModel: Codable, Hashable {
     let photoId: String
-    let title: String
+    let title: String?
     let likes: Int
     let user: User
     let imageUrls: ImageUrl

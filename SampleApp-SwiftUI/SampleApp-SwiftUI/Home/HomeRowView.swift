@@ -21,7 +21,7 @@ struct HomeRowView: View {
                 Image("img_placeholder", bundle: .main)
             }
             VStack(alignment: .leading) {
-                Text(searchResult.title)
+                Text(searchResult.title ?? "-")
                     .font(.headline)
                 Spacer()
                 HStack(alignment: .bottom) {

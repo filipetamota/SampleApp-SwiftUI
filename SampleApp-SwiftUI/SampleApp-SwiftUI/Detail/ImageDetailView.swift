@@ -53,13 +53,16 @@ struct ImageDetailView: View {
                             context.delete(favorite)
                             isFavorite = false
                         } else {
-                            let favorite = Favorite(favoriteId: detailResponse.photoId,
+                            let favorite = Favorite(photoId: detailResponse.photoId,
+                                                    title: detailResponse.title,
+                                                    desc: detailResponse.description,
                                                     width: detailResponse.width,
                                                     height: detailResponse.height,
                                                     likes: detailResponse.likes,
                                                     userName: detailResponse.user.name,
                                                     imageUrl: detailResponse.imageUrls.regular,
-                                                    thumbUrl: detailResponse.imageUrls.thumb)
+                                                    thumbUrl: detailResponse.imageUrls.thumb,
+                                                    equipment: detailResponse.equipment?.model, location: detailResponse.location?.name)
                             context.insert(favorite)
                             isFavorite = true
                         }

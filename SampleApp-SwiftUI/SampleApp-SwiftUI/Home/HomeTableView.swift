@@ -10,31 +10,29 @@ import SwiftUI
 
 struct HomeTableView: View {
     @ObservedObject var viewModel = SearchResultViewModel()
+    @State private var showNew = false
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(viewModel.searchResults, id: \.self) { searchResult in
-                    NavigationLink(destination: ImageDetailView(photoId: searchResult.photoId)) {
-                        HomeRowView(searchResult: searchResult)
-                            .task {
-                                if viewModel.shouldLoadMore(lastItem: searchResult) {
-                                    viewModel.loadMore()
-                                }
+        List {
+            ForEach(viewModel.searchResults, id: \.self) { searchResult in
+                NavigationLink(destination: ImageDetailView(photoId: searchResult.photoId)) {
+                    HomeRowView(searchResult: searchResult)
+                        .task {
+                            if viewModel.shouldLoadMore(lastItem: searchResult) {
+                                viewModel.loadMore()
                             }
-                    }
-
+                        }
                 }
-            }.listStyle(.plain)
+            }
         }
+        .listStyle(.plain)
         .navigationTitle("Search")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Image(systemName: "book")
-                    .onTapGesture {
-                        
-                    }
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink(destination: FavoriteTableView()) {
+                    Image(systemName: "book")
+                }
             }
         }
         .searchable(text: $viewModel.searchQuery, placement: .automatic)
@@ -43,13 +41,11 @@ struct HomeTableView: View {
         } message: {
             Text(viewModel.errorMessage)
         }
-
+        
         
     }
 }
 
-struct HomeTableView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeTableView()
-    }
+#Preview {
+    HomeTableView()
 }
