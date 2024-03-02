@@ -6,15 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ImageDetailView: View {
+    @Environment(\.modelContext) private var context
     let photoId: String
     @ObservedObject var viewModel = ImageDetailViewModel()
+    @State private var isFavorite = false
+    
+    private var detailResponse: DetailResponseModel {
+        viewModel.detailResponse
+    }
     
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: 10) {
-                AsyncImage(url: URL(string: viewModel.detailResponse.imageUrls.regular)) { image in
+                AsyncImage(url: URL(string: detailResponse.imageUrls.regular)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -23,15 +30,15 @@ struct ImageDetailView: View {
                     Image("img_placeholder", bundle: .main)
                 }
 
-                if let title = viewModel.detailResponse.title {
+                if let title = detailResponse.title {
                     Text(title)
                         .font(.headline)
                 }
-                if let description = viewModel.detailResponse.description {
+                if let description = detailResponse.description {
                     Text(description)
                         .font(.subheadline)
                 }
-                Text(buildTakenText(model: viewModel.detailResponse))
+                Text(buildTakenText(model: detailResponse))
                     .font(.footnote)
                 Spacer()
             }
@@ -40,15 +47,29 @@ struct ImageDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Image(systemName: "bookmark.circle")
+                Image(systemName: $isFavorite.wrappedValue ? "bookmark.circle.fill" : "bookmark.circle")
                     .onTapGesture {
-                        
+                        if let favorite = context.getFavoriteById(favId: detailResponse.photoId) {
+                            context.delete(favorite)
+                            isFavorite = false
+                        } else {
+                            let favorite = Favorite(favoriteId: detailResponse.photoId,
+                                                    width: detailResponse.width,
+                                                    height: detailResponse.height,
+                                                    likes: detailResponse.likes,
+                                                    userName: detailResponse.user.name,
+                                                    imageUrl: detailResponse.imageUrls.regular,
+                                                    thumbUrl: detailResponse.imageUrls.thumb)
+                            context.insert(favorite)
+                            isFavorite = true
+                        }
                     }
             }
         }
         .padding()
         .onAppear(perform: {
             viewModel.getImageDetail(photoId: photoId)
+            isFavorite = context.checkIfIsFavorite(favId: photoId)
         })
     }
     
@@ -64,6 +85,7 @@ struct ImageDetailView: View {
         
         return takenByText
     }
+    
 }
 
 #Preview {
