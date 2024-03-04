@@ -41,6 +41,7 @@ final class SearchResultViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var searchQuery: String = ""
     @Published private(set) var searchResults: [SearchResultModel] = []
+    @Published var showLoadingIndicator: Bool = false
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
 
@@ -64,9 +65,11 @@ final class SearchResultViewModel: ObservableObject {
     }
     
     private func getSearchResults(query: String, page: Int = 1) {
+        showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .search, queryParams: ["query": query, "page": String(page)]) else {
             showError = true
             errorMessage = "Error in URLRequest"
+            showLoadingIndicator = false
             return
         }
         APIClient.shared.getSearchResults(request: request, type: SearchResponseModel.self)
@@ -77,6 +80,7 @@ final class SearchResultViewModel: ObservableObject {
                 case .failure(let error):
                     self.showError = true
                     self.errorMessage = error.localizedDescription
+                    self.showLoadingIndicator = false
                     break
                 }
             } receiveValue: { searchResponse in
@@ -84,6 +88,7 @@ final class SearchResultViewModel: ObservableObject {
                 self.totalResults = searchResponse.total
                 self.totalPages = searchResponse.total_pages
                 self.searchResults += searchResponse.results
+                self.showLoadingIndicator = false
             }
             .store(in: &cancellables)
     }
@@ -93,6 +98,6 @@ final class SearchResultViewModel: ObservableObject {
     }
     
     func shouldLoadMore(lastItem searchResult: SearchResultModel) -> Bool {
-        nextPage <= totalPages && searchResults.last?.photoId == searchResult.photoId
+        searchResults.count < totalResults && searchResults.last?.photoId == searchResult.photoId
     }
 }

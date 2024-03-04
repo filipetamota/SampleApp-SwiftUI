@@ -60,14 +60,17 @@ struct DetailResponseModel: Codable, Hashable {
 final class ImageDetailViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published private(set) var detailResponse: DetailResponseModel = .empty
+    @Published var showLoadingIndicator: Bool = false
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
 
     
     func getImageDetail(photoId: String) {
+        showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .get, pathVariable: photoId) else {
             showError = true
             errorMessage = "Error in URLRequest"
+            showLoadingIndicator = false
             return
         }
         APIClient.shared.getSearchResults(request: request, type: DetailResponseModel.self)
@@ -78,10 +81,12 @@ final class ImageDetailViewModel: ObservableObject {
                 case .failure(let error):
                     self.showError = true
                     self.errorMessage = error.localizedDescription
+                    self.showLoadingIndicator = false
                     break
                 }
             } receiveValue: { detailResponse in
                 self.detailResponse = detailResponse
+                self.showLoadingIndicator = false
             }
             .store(in: &cancellables)
     }
