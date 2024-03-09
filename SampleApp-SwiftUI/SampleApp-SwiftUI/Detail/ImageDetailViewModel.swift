@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct DetailResponseModel: Codable, Hashable {
+struct DetailResponseModel: Decodable {
     let photoId: String
     let width: Int
     let height: Int
@@ -20,20 +20,20 @@ struct DetailResponseModel: Codable, Hashable {
     let equipment: Equipment?
     let location: Location?
     
-    struct User: Codable, Hashable {
+    struct User: Decodable {
         let name: String
     }
 
-    struct ImageUrl: Codable, Hashable {
+    struct ImageUrl: Decodable {
         let regular: String
         let thumb: String
     }
     
-    struct Equipment: Codable, Hashable {
+    struct Equipment: Decodable {
         let model: String?
     }
     
-    struct Location: Codable, Hashable {
+    struct Location: Decodable {
         let name: String?
     }
     

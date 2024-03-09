@@ -8,24 +8,24 @@
 import SwiftUI
 import Combine
 
-struct SearchResponseModel: Codable {
+struct SearchResponseModel: Decodable {
     let total: Int
     let total_pages: Int
     let results: [SearchResultModel]
 }
 
-struct SearchResultModel: Codable, Hashable {
+struct SearchResultModel: Decodable, Hashable {
     let photoId: String
     let title: String?
     let likes: Int
     let user: User
     let imageUrls: ImageUrl
     
-    struct User: Codable, Hashable {
+    struct User: Decodable, Hashable {
         let name: String
     }
 
-    struct ImageUrl: Codable, Hashable {
+    struct ImageUrl: Decodable, Hashable {
         let thumb: String
     }
     
