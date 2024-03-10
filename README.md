@@ -1,4 +1,6 @@
 # SampleApp-SwiftUI
-A code sample app using SwiftUI and the Unsplash API.
+This app was created using the Unsplash API, SwiftUI, MVVM architecture, Swift Data for persistence and Combine. Includes Unit and UI tests.
 
-Check out the [UIKit Version](https://github.com/filipetamota/SampleApp-UIKit)!
+This code is meant to be used as a sample coding app for future job selections and work opportunities.
+
+Check out the UIKit version [here](https://github.com/filipetamota/SampleApp-UIKit).
