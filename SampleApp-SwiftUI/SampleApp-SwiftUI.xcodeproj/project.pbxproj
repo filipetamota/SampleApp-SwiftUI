@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D407F46B2B9D2C870084C586 /* ContentViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */; };
 		D407F46D2B9D332D0084C586 /* ImageDetailViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */; };
+		D407F4712B9D39EC0084C586 /* FavoriteTableViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407F4702B9D39EC0084C586 /* FavoriteTableViewUITests.swift */; };
 		D48727312B96572F00ACC04E /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48727302B96572F00ACC04E /* LoadingIndicatorView.swift */; };
 		D48727332B9657C700ACC04E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48727322B9657C700ACC04E /* View.swift */; };
 		D4A79E002B90C81D008D5D0D /* ImageDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A79DFF2B90C81D008D5D0D /* ImageDetailViewModel.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewUITests.swift; sourceTree = "<group>"; };
 		D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewUITests.swift; sourceTree = "<group>"; };
+		D407F4702B9D39EC0084C586 /* FavoriteTableViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewUITests.swift; sourceTree = "<group>"; };
 		D48727302B96572F00ACC04E /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		D48727322B9657C700ACC04E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D4A79DFF2B90C81D008D5D0D /* ImageDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewModel.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			children = (
 				D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */,
 				D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */,
+				D407F4702B9D39EC0084C586 /* FavoriteTableViewUITests.swift */,
 			);
 			path = "SampleApp-SwiftUIUITests";
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D407F4712B9D39EC0084C586 /* FavoriteTableViewUITests.swift in Sources */,
 				D407F46B2B9D2C870084C586 /* ContentViewUITests.swift in Sources */,
 				D407F46D2B9D332D0084C586 /* ImageDetailViewUITests.swift in Sources */,
 			);
