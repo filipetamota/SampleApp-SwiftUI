@@ -8,7 +8,17 @@
 import SwiftUI
 import Combine
 
-struct DetailResponseModel: Decodable {
+struct DetailResponseModel: Decodable, Equatable {
+    
+    static func == (lhs: DetailResponseModel, rhs: DetailResponseModel) -> Bool {
+        return 
+            lhs.photoId == rhs.photoId &&
+            lhs.width == rhs.width &&
+            lhs.height == rhs.height &&
+            lhs.title == rhs.title &&
+            lhs.description == rhs.description
+    }
+    
     let photoId: String
     let width: Int
     let height: Int
@@ -63,8 +73,9 @@ final class ImageDetailViewModel: ObservableObject {
     @Published var showLoadingIndicator: Bool = false
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
-
     
+    public var apiClient: APIClient = AppAPIClient()
+
     func getImageDetail(photoId: String) {
         showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .get, pathVariable: photoId) else {
@@ -73,7 +84,7 @@ final class ImageDetailViewModel: ObservableObject {
             showLoadingIndicator = false
             return
         }
-        APIClient.shared.getSearchResults(request: request, type: DetailResponseModel.self)
+        apiClient.fetchData(request: request, type: DetailResponseModel.self)
             .sink { [weak self] completion in
                 switch completion {
                 case .finished:

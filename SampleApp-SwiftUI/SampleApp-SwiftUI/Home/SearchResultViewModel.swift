@@ -45,9 +45,11 @@ final class SearchResultViewModel: ObservableObject {
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
 
-    private var nextPage: Int = 1
+    var nextPage: Int = 1
     private var totalResults: Int = 0
     private var totalPages: Int = 0
+    
+    public var apiClient: APIClient = AppAPIClient()
     
     init() {
         addSubscribers()
@@ -64,7 +66,7 @@ final class SearchResultViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func getSearchResults(query: String, page: Int = 1) {
+    func getSearchResults(query: String, page: Int = 1) {
         showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .search, queryParams: ["query": query, "page": String(page)]) else {
             showError = true
@@ -72,7 +74,7 @@ final class SearchResultViewModel: ObservableObject {
             showLoadingIndicator = false
             return
         }
-        APIClient.shared.getSearchResults(request: request, type: SearchResponseModel.self)
+        apiClient.fetchData(request: request, type: SearchResponseModel.self)
             .sink { [weak self ] completion in
                 switch completion {
                 case .finished:

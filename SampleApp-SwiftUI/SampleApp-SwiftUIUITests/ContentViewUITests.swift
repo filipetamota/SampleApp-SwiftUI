@@ -60,6 +60,7 @@ final class ContentViewUITests: XCTestCase {
 extension XCTestCase {
     func doDogSearch(app: XCUIApplication) {
         let searchBar = app.navigationBars["Search"].searchFields["Search"]
+        XCTAssertTrue(searchBar.waitForExistence(timeout: 5))
         searchBar.tap()
         
         let dKey = app/*@START_MENU_TOKEN@*/.keys["D"]/*[[".keyboards.keys[\"D\"]",".keys[\"D\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/

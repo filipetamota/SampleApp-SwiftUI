@@ -29,11 +29,14 @@ enum RequestData {
     }
 }
 
-final class APIClient {
+protocol APIClient {
+    func fetchData<T: Decodable> (request: URLRequest, type: T.Type) -> Future<T, URLError>
+}
+
+final class AppAPIClient: APIClient {
     private var cancellables = Set<AnyCancellable>()
-    static var shared = APIClient()
     
-    func getSearchResults<T: Decodable> (request: URLRequest, type: T.Type) -> Future<T, URLError> {
+    func fetchData<T: Decodable> (request: URLRequest, type: T.Type) -> Future<T, URLError> {
         return Future<T, URLError> { [weak self] promise in
             guard let self = self else {
                 promise(.failure(URLError(.badURL)))
