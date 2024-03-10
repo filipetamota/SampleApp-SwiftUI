@@ -11,7 +11,7 @@ import Combine
 
 final class ImageDetailViewModelTests: XCTestCase {
 
-    func testImageDetailtViewModelInit() {
+    func testImageDetailViewModelInit() {
         // Given
         
         // When

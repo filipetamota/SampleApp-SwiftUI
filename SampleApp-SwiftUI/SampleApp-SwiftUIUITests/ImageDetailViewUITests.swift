@@ -12,6 +12,7 @@ final class ImageDetailViewUITests: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = false
+        app.launchArguments = ["enable-testing"]
         app.launch()
         doDogSearch(app: app)
     }

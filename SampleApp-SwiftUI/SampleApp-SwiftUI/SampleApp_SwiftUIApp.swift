@@ -11,8 +11,15 @@ import SwiftData
 @main
 struct SampleApp_SwiftUIApp: App {
     var sharedModelContainer: ModelContainer = {
+        var inMemory = false
+
+        #if DEBUG
+        if CommandLine.arguments.contains("enable-testing") {
+            inMemory = true
+        }
+        #endif
         let schema = Schema([Favorite.self])
-        let config = ModelConfiguration()
+        let config = ModelConfiguration(for: Favorite.self, isStoredInMemoryOnly: inMemory)
 
         do {
             return try ModelContainer(for: schema, configurations: config)

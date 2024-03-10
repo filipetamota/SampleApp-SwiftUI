@@ -12,6 +12,7 @@ final class ContentViewUITests: XCTestCase {
     
     override func setUpWithError() throws {
         continueAfterFailure = false
+        app.launchArguments = ["enable-testing"]
         app.launch()
     }
     
