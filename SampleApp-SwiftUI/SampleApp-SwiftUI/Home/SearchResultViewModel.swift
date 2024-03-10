@@ -68,27 +68,27 @@ final class SearchResultViewModel: ObservableObject {
         showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .search, queryParams: ["query": query, "page": String(page)]) else {
             showError = true
-            errorMessage = "Error in URLRequest"
+            errorMessage = NSLocalizedString("error_url_request", comment: "")
             showLoadingIndicator = false
             return
         }
         APIClient.shared.getSearchResults(request: request, type: SearchResponseModel.self)
-            .sink { completion in
+            .sink { [weak self ] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
-                    self.showError = true
-                    self.errorMessage = error.localizedDescription
-                    self.showLoadingIndicator = false
+                    self?.showError = true
+                    self?.errorMessage = error.localizedDescription
+                    self?.showLoadingIndicator = false
                     break
                 }
-            } receiveValue: { searchResponse in
-                self.nextPage += 1
-                self.totalResults = searchResponse.total
-                self.totalPages = searchResponse.total_pages
-                self.searchResults += searchResponse.results
-                self.showLoadingIndicator = false
+            } receiveValue: { [weak self ] searchResponse in
+                self?.nextPage += 1
+                self?.totalResults = searchResponse.total
+                self?.totalPages = searchResponse.total_pages
+                self?.searchResults += searchResponse.results
+                self?.showLoadingIndicator = false
             }
             .store(in: &cancellables)
     }

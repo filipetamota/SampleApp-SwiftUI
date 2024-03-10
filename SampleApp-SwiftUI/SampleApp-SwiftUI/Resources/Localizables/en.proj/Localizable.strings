@@ -6,13 +6,16 @@
   
 */
 
-// Errors:
-
-"error_add_favorite" = "Error adding Favorite";
-"error_removed_favorite" = "Error removing Favorite";
-"error_connection" = "Connection error";
-"error_api" = "API error";
-"error_parsing" = "Parsing error";
-"error_request" = "Request error";
-"error_model" = "Model error";
-"error_unknown" = "Unknown error";
+"search_title" = "Search";
+"detail_title" = "Detail";
+"favorites_title" = "Favorites";
+"taken_by" = "Taken by %@";
+"taken_in" = " in %@";
+"taken_with" = " with %@";
+"number_of_likes" = "%d likes";
+"no_results" = "No results to show.\nDo a search to see some results";
+"error" = "Error";
+"success" = "Success";
+"favorite_added" = "Favorite added";
+"favorite_removed" = "Favorite removed";
+"error_url_request" = "Error in URLRequest";

@@ -13,6 +13,7 @@ struct ImageDetailView: View {
     let photoId: String
     @ObservedObject var viewModel = ImageDetailViewModel()
     @State private var isFavorite = false
+    @State private var showFavoriteAlert = false
     
     private var detailResponse: DetailResponseModel {
         viewModel.detailResponse
@@ -46,7 +47,7 @@ struct ImageDetailView: View {
                     Spacer()
                 }
             }
-            .navigationTitle("Detail")
+            .navigationTitle(NSLocalizedString("detail_title", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -55,6 +56,7 @@ struct ImageDetailView: View {
                             if let favorite = context.getFavoriteById(favId: detailResponse.photoId) {
                                 context.delete(favorite)
                                 isFavorite = false
+                                showFavoriteAlert = true
                             } else {
                                 let favorite = Favorite(photoId: detailResponse.photoId,
                                                         title: detailResponse.title,
@@ -68,8 +70,10 @@ struct ImageDetailView: View {
                                                         equipment: detailResponse.equipment?.model, location: detailResponse.location?.name)
                                 context.insert(favorite)
                                 isFavorite = true
+                                showFavoriteAlert = true
                             }
                         }
+                        .accessibilityIdentifier("FavoriteButton")
                 }
             }
             .padding()
@@ -77,17 +81,26 @@ struct ImageDetailView: View {
                 viewModel.getImageDetail(photoId: photoId)
                 isFavorite = context.checkIfIsFavorite(favId: photoId)
         })
+            .alert(NSLocalizedString("success", comment: ""), isPresented: $showFavoriteAlert) {
+            } message: {
+                if isFavorite {
+                    Text(NSLocalizedString("favorite_added", comment: ""))
+                } else {
+                    Text(NSLocalizedString("favorite_removed", comment: ""))
+                }
+            }
         }
     }
     
     private func buildTakenText(model: DetailResponseModel) -> String {
-        var takenByText = "Taken by \(model.user.name)"
-        if let equipmentModel = model.equipment?.model {
-            takenByText += " with \(equipmentModel)"
-        }
+        var takenByText = String.localizedStringWithFormat(NSLocalizedString("taken_by", comment: ""), model.user.name.capitalized)
         if let location = model.location?.name {
-            takenByText += " in \(location)"
+            takenByText += String.localizedStringWithFormat(NSLocalizedString("taken_in", comment: ""), location)
         }
+        if let equipmentModel = model.equipment?.model {
+            takenByText += String.localizedStringWithFormat(NSLocalizedString("taken_with", comment: ""), equipmentModel)
+        }
+
         takenByText += "."
         
         return takenByText

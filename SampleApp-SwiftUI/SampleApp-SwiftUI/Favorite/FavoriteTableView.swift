@@ -27,7 +27,7 @@ struct FavoriteTableView: View {
                 })
             }.listStyle(.plain)
         }
-        .navigationTitle("Favorites")
+        .navigationTitle(NSLocalizedString("favorites_title", comment: ""))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear(perform: {
             favorites = context.getAllFavorites()

@@ -69,24 +69,24 @@ final class ImageDetailViewModel: ObservableObject {
         showLoadingIndicator = true
         guard let request = Utils.buildURLRequest(requestData: .get, pathVariable: photoId) else {
             showError = true
-            errorMessage = "Error in URLRequest"
+            errorMessage = NSLocalizedString("error_url_request", comment: "")
             showLoadingIndicator = false
             return
         }
         APIClient.shared.getSearchResults(request: request, type: DetailResponseModel.self)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
-                    self.showError = true
-                    self.errorMessage = error.localizedDescription
-                    self.showLoadingIndicator = false
+                    self?.showError = true
+                    self?.errorMessage = error.localizedDescription
+                    self?.showLoadingIndicator = false
                     break
                 }
-            } receiveValue: { detailResponse in
-                self.detailResponse = detailResponse
-                self.showLoadingIndicator = false
+            } receiveValue: { [weak self] detailResponse in
+                self?.detailResponse = detailResponse
+                self?.showLoadingIndicator = false
             }
             .store(in: &cancellables)
     }

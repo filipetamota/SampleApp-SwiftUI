@@ -25,10 +25,10 @@ struct HomeRowView: View {
                     .font(.headline)
                 Spacer()
                 HStack(alignment: .bottom) {
-                    Text("By \(searchResult.user.name)")
+                    Text(String.localizedStringWithFormat(NSLocalizedString("taken_by", comment: ""), searchResult.user.name.capitalized))
                         .font(.footnote)
                     Spacer()
-                    Text("\(searchResult.likes) likes")
+                    Text(String.localizedStringWithFormat(NSLocalizedString("number_of_likes", comment: ""), searchResult.likes))
                         .font(.footnote)
                 }
                 

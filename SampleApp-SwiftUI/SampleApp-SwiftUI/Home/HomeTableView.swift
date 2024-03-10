@@ -28,7 +28,7 @@ struct HomeTableView: View {
                 }
             }
             .listStyle(.plain)
-            .navigationTitle("Search")
+            .navigationTitle(NSLocalizedString("search_title", comment: ""))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -38,11 +38,18 @@ struct HomeTableView: View {
                 }
             }
             .searchable(text: $viewModel.searchQuery, placement: .automatic)
-            .alert("Error", isPresented: $viewModel.showError) {
+            .alert(NSLocalizedString("error", comment: ""), isPresented: $viewModel.showError) {
                 
             } message: {
                 Text(viewModel.errorMessage)
             }
+            .overlay(Group {
+                            if viewModel.searchResults.isEmpty {
+                                Text(NSLocalizedString("no_results", comment: ""))
+                                    .multilineTextAlignment(.center)
+                                    .accessibilityIdentifier("PlaceholderText")
+                            }
+                        })
         }
     }
 }

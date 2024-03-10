@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D407F46B2B9D2C870084C586 /* ContentViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */; };
+		D407F46D2B9D332D0084C586 /* ImageDetailViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */; };
 		D48727312B96572F00ACC04E /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48727302B96572F00ACC04E /* LoadingIndicatorView.swift */; };
 		D48727332B9657C700ACC04E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48727322B9657C700ACC04E /* View.swift */; };
 		D4A79E002B90C81D008D5D0D /* ImageDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A79DFF2B90C81D008D5D0D /* ImageDetailViewModel.swift */; };
@@ -22,8 +24,6 @@
 		D4EA30DF2B875DE3000B562E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EA30DE2B875DE3000B562E /* Assets.xcassets */; };
 		D4EA30E22B875DE3000B562E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4EA30E12B875DE3000B562E /* Preview Assets.xcassets */; };
 		D4EA30EC2B875DE3000B562E /* SampleApp_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA30EB2B875DE3000B562E /* SampleApp_SwiftUITests.swift */; };
-		D4EA30F62B875DE3000B562E /* SampleApp_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA30F52B875DE3000B562E /* SampleApp_SwiftUIUITests.swift */; };
-		D4EA30F82B875DE3000B562E /* SampleApp_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA30F72B875DE3000B562E /* SampleApp_SwiftUIUITestsLaunchTests.swift */; };
 		D4EA310B2B8A0D2B000B562E /* HomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA310A2B8A0D2B000B562E /* HomeTableView.swift */; };
 		D4EA310E2B8A0D86000B562E /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA310D2B8A0D86000B562E /* SearchResultViewModel.swift */; };
 		D4EA31102B8A0F28000B562E /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EA310F2B8A0F28000B562E /* HomeRowView.swift */; };
@@ -48,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewUITests.swift; sourceTree = "<group>"; };
+		D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewUITests.swift; sourceTree = "<group>"; };
 		D48727302B96572F00ACC04E /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		D48727322B9657C700ACC04E /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		D4A79DFF2B90C81D008D5D0D /* ImageDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewModel.swift; sourceTree = "<group>"; };
@@ -66,8 +68,6 @@
 		D4EA30E72B875DE3000B562E /* SampleApp-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SampleApp-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4EA30EB2B875DE3000B562E /* SampleApp_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleApp_SwiftUITests.swift; sourceTree = "<group>"; };
 		D4EA30F12B875DE3000B562E /* SampleApp-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SampleApp-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4EA30F52B875DE3000B562E /* SampleApp_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleApp_SwiftUIUITests.swift; sourceTree = "<group>"; };
-		D4EA30F72B875DE3000B562E /* SampleApp_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleApp_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D4EA310A2B8A0D2B000B562E /* HomeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableView.swift; sourceTree = "<group>"; };
 		D4EA310D2B8A0D86000B562E /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		D4EA310F2B8A0F28000B562E /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
@@ -212,8 +212,8 @@
 		D4EA30F42B875DE3000B562E /* SampleApp-SwiftUIUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D4EA30F52B875DE3000B562E /* SampleApp_SwiftUIUITests.swift */,
-				D4EA30F72B875DE3000B562E /* SampleApp_SwiftUIUITestsLaunchTests.swift */,
+				D407F46A2B9D2C870084C586 /* ContentViewUITests.swift */,
+				D407F46C2B9D332D0084C586 /* ImageDetailViewUITests.swift */,
 			);
 			path = "SampleApp-SwiftUIUITests";
 			sourceTree = "<group>";
@@ -324,6 +324,7 @@
 					};
 					D4EA30F02B875DE3000B562E = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1520;
 						TestTargetID = D4EA30D42B875DE1000B562E;
 					};
 				};
@@ -410,8 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4EA30F82B875DE3000B562E /* SampleApp_SwiftUIUITestsLaunchTests.swift in Sources */,
-				D4EA30F62B875DE3000B562E /* SampleApp_SwiftUIUITests.swift in Sources */,
+				D407F46B2B9D2C870084C586 /* ContentViewUITests.swift in Sources */,
+				D407F46D2B9D332D0084C586 /* ImageDetailViewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +649,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -655,6 +657,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.filipetamota.SampleApp-SwiftUIUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "SampleApp-SwiftUI";
@@ -665,6 +668,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
