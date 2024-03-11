@@ -1,5 +1,5 @@
 //
-//  ImageCellView.swift
+//  HomeRowView.swift
 //  SampleApp-SwiftUI
 //
 //  Created by Filipe Mota on 24/2/24.
@@ -31,14 +31,12 @@ struct HomeRowView: View {
                     Text(String.localizedStringWithFormat(NSLocalizedString("number_of_likes", comment: ""), searchResult.likes))
                         .font(.footnote)
                 }
-                
             }
-            
         }
         .padding(.vertical, 8)
     }
 }
 
 #Preview {
-    HomeRowView(searchResult: SearchResultModel(photoId: "1", title: "Preview title", likes: 200, user: .init(name: "User Name"), imageUrls: .init(thumb: "")))
+    HomeRowView(searchResult: .mock)
 }

@@ -44,12 +44,12 @@ struct HomeTableView: View {
                 Text(viewModel.errorMessage)
             }
             .overlay(Group {
-                            if viewModel.searchResults.isEmpty {
-                                Text(NSLocalizedString("no_results", comment: ""))
-                                    .multilineTextAlignment(.center)
-                                    .accessibilityIdentifier("PlaceholderText")
-                            }
-                        })
+                if viewModel.searchResults.isEmpty {
+                    Text(NSLocalizedString("no_results", comment: ""))
+                        .multilineTextAlignment(.center)
+                        .accessibilityIdentifier("PlaceholderText")
+                }
+            })
         }
     }
 }

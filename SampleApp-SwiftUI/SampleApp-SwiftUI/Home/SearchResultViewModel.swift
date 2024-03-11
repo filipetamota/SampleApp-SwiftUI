@@ -1,5 +1,5 @@
 //
-//  ImageListModel.swift
+//  SearchResultViewModel.swift
 //  SampleApp-SwiftUI
 //
 //  Created by Filipe Mota on 24/2/24.
@@ -35,6 +35,12 @@ struct SearchResultModel: Decodable, Hashable {
         case likes, user
         case imageUrls = "urls"
     }
+    
+    static let mock = SearchResultModel(photoId: "1",
+                                        title: "Preview title",
+                                        likes: 200,
+                                        user: .init(name: "User Name"),
+                                        imageUrls: .init(thumb: ""))
 }
 
 final class SearchResultViewModel: ObservableObject {
