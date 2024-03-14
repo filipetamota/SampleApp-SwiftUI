@@ -73,11 +73,11 @@ final class SearchResultViewModel: ObservableObject {
     }
     
     func getSearchResults(query: String, page: Int = 1) {
-        showLoadingIndicator = true
+        showLoadingIndicator.toggle()
         guard let request = Utils.buildURLRequest(requestData: .search, queryParams: ["query": query, "page": String(page)]) else {
-            showError = true
+            showError.toggle()
             errorMessage = NSLocalizedString("error_url_request", comment: "")
-            showLoadingIndicator = false
+            showLoadingIndicator.toggle()
             return
         }
         apiClient.fetchData(request: request, type: SearchResponseModel.self)
@@ -86,9 +86,9 @@ final class SearchResultViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
-                    self?.showError = true
+                    self?.showError.toggle()
                     self?.errorMessage = error.localizedDescription
-                    self?.showLoadingIndicator = false
+                    self?.showLoadingIndicator.toggle()
                     break
                 }
             } receiveValue: { [weak self ] searchResponse in
@@ -96,7 +96,7 @@ final class SearchResultViewModel: ObservableObject {
                 self?.totalResults = searchResponse.total
                 self?.totalPages = searchResponse.total_pages
                 self?.searchResults += searchResponse.results
-                self?.showLoadingIndicator = false
+                self?.showLoadingIndicator.toggle()
             }
             .store(in: &cancellables)
     }

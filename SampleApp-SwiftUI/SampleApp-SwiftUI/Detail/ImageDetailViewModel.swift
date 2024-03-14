@@ -77,11 +77,11 @@ final class ImageDetailViewModel: ObservableObject {
     public var apiClient: APIClient = AppAPIClient()
 
     func getImageDetail(photoId: String) {
-        showLoadingIndicator = true
+        showLoadingIndicator.toggle()
         guard let request = Utils.buildURLRequest(requestData: .get, pathVariable: photoId) else {
-            showError = true
+            showError.toggle()
             errorMessage = NSLocalizedString("error_url_request", comment: "")
-            showLoadingIndicator = false
+            showLoadingIndicator.toggle()
             return
         }
         apiClient.fetchData(request: request, type: DetailResponseModel.self)
@@ -90,14 +90,14 @@ final class ImageDetailViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
-                    self?.showError = true
+                    self?.showError.toggle()
                     self?.errorMessage = error.localizedDescription
-                    self?.showLoadingIndicator = false
+                    self?.showLoadingIndicator.toggle()
                     break
                 }
             } receiveValue: { [weak self] detailResponse in
                 self?.detailResponse = detailResponse
-                self?.showLoadingIndicator = false
+                self?.showLoadingIndicator.toggle()
             }
             .store(in: &cancellables)
     }

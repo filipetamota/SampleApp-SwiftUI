@@ -56,7 +56,7 @@ struct ImageDetailView: View {
                             if let favorite = context.getFavoriteById(favId: detailResponse.photoId) {
                                 context.delete(favorite)
                                 isFavorite = false
-                                showFavoriteAlert = true
+                                showFavoriteAlert.toggle()
                             } else {
                                 let favorite = Favorite(photoId: detailResponse.photoId,
                                                         title: detailResponse.title,
@@ -70,7 +70,7 @@ struct ImageDetailView: View {
                                                         equipment: detailResponse.equipment?.model, location: detailResponse.location?.name)
                                 context.insert(favorite)
                                 isFavorite = true
-                                showFavoriteAlert = true
+                                showFavoriteAlert.toggle()
                             }
                         }
                         .accessibilityIdentifier("FavoriteButton")
