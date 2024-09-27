@@ -67,7 +67,9 @@ final class SearchResultViewModel: ObservableObject {
             .sink { [weak self] searchQuery in
                 self?.nextPage = 1
                 self?.searchResults.removeAll()
-                self?.getSearchResults(query: searchQuery)
+                if !searchQuery.isEmpty {
+                    self?.getSearchResults(query: searchQuery)
+                }
             }
             .store(in: &cancellables)
     }
